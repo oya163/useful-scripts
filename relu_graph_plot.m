@@ -11,4 +11,4 @@ f = max(0, X);              % ReLU function
 Y = diff(f)/limit;          % first derivative
 plot(X,f,'b', X(:,1:length(Y)),Y,'r')   %graph plot
 legend('f(x)', 'f''(x)')                % legend
-title('ReLU and its derivate')          % title
+title('ReLU and its derivative')          % title
