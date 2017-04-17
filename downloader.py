@@ -14,7 +14,7 @@ fileName = sys.argv[1]
 
 firstName = os.path.splitext(fileName)[0]
 
-print ("Downloading images from ", firstName)
+print ("Download started ", firstName)
 
 imageCounter = 1
 
@@ -26,10 +26,17 @@ with open(fileName) as file:
 		fName = firstName + "_" + str(imageCounter) + ".jpg"
 		fullPath = os.path.join(firstName, fName)
 		try:
+			print ("Downloading .... ")
 			urlretrieve(url.strip(), fullPath)
+			imageCounter = imageCounter + 1
+			print ("Image downloaded ", imageCounter)
 		except urllib.error.HTTPError as e:
+			print("HTTP Error")
 			continue
-		imageCounter = imageCounter + 1
+		except urllib.error.URLError as err:
+			print("URL Error")
+			continue
+
 		
 
 
