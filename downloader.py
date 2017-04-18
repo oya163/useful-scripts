@@ -27,11 +27,15 @@ with open(fileName) as file:
 		fullPath = os.path.join(firstName, fName)
 		try:
 			print ("Downloading .... ")
+			urllib.request.urlopen(url, timeout=5)
 			urlretrieve(url.strip(), fullPath)
-			imageCounter = imageCounter + 1
-			print ("Image downloaded ", imageCounter)
+			print ("Image downloaded ", imageCounter)			
+			imageCounter = imageCounter + 1			
 		except urllib.error.HTTPError as e:
 			print("HTTP Error")
+			continue
+		except timeout:
+			print("Timeout Error")
 			continue
 		except urllib.error.URLError as err:
 			print("URL Error")
