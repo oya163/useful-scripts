@@ -17,6 +17,7 @@ firstName = os.path.splitext(fileName)[0]
 print ("Download started ", firstName)
 
 imageCounter = 1
+lineCounter = 0
 
 if not os.path.exists(firstName):
             os.mkdir(firstName)
@@ -25,12 +26,13 @@ with open(fileName) as file:
 	for url in file:
 		fName = firstName + "_" + str(imageCounter) + ".jpg"
 		fullPath = os.path.join(firstName, fName)
+		lineCounter += 1
 		try:
 			print ("Downloading .... ")
 			urllib.request.urlopen(url, timeout=5)
 			urlretrieve(url.strip(), fullPath)
 			print ("Image downloaded ", imageCounter)			
-			imageCounter = imageCounter + 1			
+			imageCounter += 1		
 		except urllib.error.HTTPError as e:
 			print("HTTP Error")
 			continue
@@ -39,6 +41,9 @@ with open(fileName) as file:
 			continue
 		except urllib.error.URLError as err:
 			print("URL Error")
+			continue
+		except ValueError as e:
+			print("Value Error")
 			continue
 
 		
